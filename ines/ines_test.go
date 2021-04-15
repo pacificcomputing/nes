@@ -5,13 +5,13 @@ import (
 	"testing"
 )
 
-func TestHeader_Read(t *testing.T) {
+func TestParse(t *testing.T) {
 	f, err := os.Open("../tests/cpu/branch_timing_tests/1.Branch_Basics.nes")
 	if err != nil {
 		t.Errorf("Error opening test case: %v", err)
 	}
-	h := Header{}
-	if err := h.Read(f); err != nil {
+	defer f.Close()
+	if _, err := Parse(f); err != nil {
 		t.Errorf("Error parsing header: %v", err)
 	}
 }
